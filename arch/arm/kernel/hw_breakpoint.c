@@ -851,6 +851,7 @@ static int hw_breakpoint_pending(unsigned long addr, unsigned int fsr,
 {
 	int ret = 0;
 	u32 dscr;
+	struct siginfo info;
 
 	preempt_disable();
 
@@ -870,6 +871,14 @@ static int hw_breakpoint_pending(unsigned long addr, unsigned int fsr,
 	case ARM_ENTRY_SYNC_WATCHPOINT:
 		watchpoint_handler(addr, fsr, regs);
 		break;
+	case 3:
+        preempt_enable();
+        info.si_signo = SIGTRAP;
+        info.si_errno = 0;
+        info.si_code  = 0;
+        info.si_addr  = (void __user *)addr;
+        arm_notify_die("", regs, &info, fsr, 0);
+        return 0;
 	default:
 		ret = 1; /* Unhandled fault. */
 	}

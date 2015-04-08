@@ -51,3 +51,4 @@ obj-$(CONFIG_USB_SWITCH_FSA9480) += fsa9480.o
 obj-$(CONFIG_ALTERA_STAPL)	+=altera-stapl/
 obj-$(CONFIG_INTEL_MEI)		+= mei/
 obj-$(CONFIG_BCM2708_VCHIQ)	+= vc04_services/
+obj-$(CONFIG_TX_433) += tx433.o

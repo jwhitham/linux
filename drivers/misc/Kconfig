@@ -509,6 +509,12 @@ config USB_SWITCH_FSA9480
 	  stereo and mono audio, video, microphone and UART data to use
 	  a common connector port.
 
+config TX_433
+    tristate "TX433 Driver"
+    default n
+    help
+      Jack's 433MHz transmitter driver.
+
 source "drivers/misc/c2port/Kconfig"
 source "drivers/misc/eeprom/Kconfig"
 source "drivers/misc/cb710/Kconfig"
